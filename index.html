@@ -86,19 +86,19 @@
         <section id="overview">
             <h2>Overview</h2>
             <p>
-                This application is a simple, multi-threaded utility designed to help users explore their local network. It combines two essential network reconnaissance features: **Device Discovery** (ARP Scan) and a flexible **Port Scanner** for a specified host. The application features a user-friendly Graphical User Interface (GUI) built with the Python **Tkinter** library, ensuring that the main window remains responsive during long-running network scans.
+                This application is a simple, multi-threaded utility designed to help users explore their local network. It combines two essential network reconnaissance features: Device Discovery (ARP Scan) and a flexible Port Scanner for a specified host. The application features a user-friendly Graphical User Interface (GUI) built with the Python Tkinter library, ensuring that the main window remains responsive during long-running network scans.
                             </p>
         </section>
 
         <section id="features">
             <h2>Key Features</h2>
             <ul class="feature-list">
-                <li><strong>Local Device Scanner:</strong> Performs an **ARP scan** to discover active devices on the local subnet, listing their **IP and MAC addresses**.</li>
-                <li><strong>Interactive Selection:</strong> Users can select a discovered device from the list to automatically populate the **Target IP** field for port scanning.</li>
+                <li><strong>Local Device Scanner:</strong> Performs an ARP scan to discover active devices on the local subnet, listing their IP and MAC addresses.</li>
+                <li><strong>Interactive Selection:</strong> Users can select a discovered device from the list to automatically populate the Target IP field for port scanning.</li>
                 <li><strong>Port Scanner:</strong> Scans a customizable range of ports on a specified target IP address.</li>
-                <li><strong>Protocol Selection:</strong> Supports both **TCP** (using socket connection attempts) and **UDP** (less reliable/slower, using socket send/recv with timeout).</li>
+                <li><strong>Protocol Selection:</strong> Supports both TCP (using socket connection attempts) and UDP (less reliable/slower, using socket send/recv with timeout).</li>
                 <li><strong>Common Port Mapping:</strong> Automatically identifies the service for common port numbers (e.g., 80 for HTTP, 443 for HTTPS, 22 for SSH).</li>
-                <li><strong>Responsive GUI:</strong> Uses **Python Threading** to run intensive scanning operations in the background, preventing the GUI from freezing.</li>
+                <li><strong>Responsive GUI:</strong> Uses Python Threading to run intensive scanning operations in the background, preventing the GUI from freezing.</li>
                 <li><strong>Progress Bar:</strong> Includes a progress bar to visually track the status of the port scan.</li>
             </ul>
         </section>
@@ -212,7 +212,7 @@ class NetworkToolApp:
         status_bar.pack(side=tk.BOTTOM, fill=tk.X)
 
     def start_device_scan(self):
-        self.tree.delete(*self.tree.get_children())
+        self.tree.delete(self.tree.get_children())
         self.status_var.set("Scanning network for devices... Please wait.")
         threading.Thread(target=self.scan_network_thread, daemon=True).start()
 
@@ -269,7 +269,7 @@ class NetworkToolApp:
         self.btn_scan.config(state='disabled')
         self.result_area.config(state='normal')
         self.result_area.delete(1.0, tk.END)
-        self.result_area.insert(tk.END, f"Scanning {ip} ({self.scan_protocol.get()})...\n" + "-"*40 + "\n")
+        self.result_area.insert(tk.END, f"Scanning {ip} ({self.scan_protocol.get()})...\n" + "-"40 + "\n")
         self.result_area.config(state='disabled')
         
         threading.Thread(target=self.scan_ports_thread, args=(ip, start_p, end_p), daemon=True).start()
